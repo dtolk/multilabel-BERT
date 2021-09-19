@@ -50,11 +50,20 @@ Here is an example
 ```
 The data is parsed, preprocessed and filtered in this notebook `notebooks/data-preparation.ipynb`. Some of the categories such as `acc-phys`, `econ` are underrepresented in the arXiv, I will exclude the categories with very low frequencies to simplify the task (this is a proof of concept project).
 ![text](figs/topics-1.png)
+
 After the filtering end encoding only 8 most popular categories are present in the final dataset that we will use.
-The PCA analysis of the most popular categories confirms the presence of the signal of the dataset.
+The PCA analysis of the most popular categories confirms the presence of the signal of the dataset (see the notebook).
 <p align="center">
-<img src="figs/pca-1.png", width=300>
+<img src="figs/pca-1.png", width=500>
 </p>
+
+Note that the PCA is performed using articles with a single label across the topics to get a clear signal.
+
+## Hugging Face Transformer for text classification
+
+The model that I am goung to use for the multi-abel text classification is relying on the pretrained [BERT model from Hugging Face](https://huggingface.co/transformers/model_doc/bert.html). We fine-tune the pretrained BERT model with one additional output layer that handles the labeling.
+
+
 
 
 
