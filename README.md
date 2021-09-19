@@ -11,7 +11,7 @@ I add classification an additional layer to the pretrained BERT from Transformer
 
 - Data preprocessing 
 - Preprocess text data for BERT
-- Build PyTorch Dataset (tokenization, attention mask and padding)
+- Build PyTorch Dataset (tokenization with BERT tokenizer, attention mask and padding)
 - Use transfer learning to build Multi-label Text Classifier (MLTC) using the Transformers library by Hugging Face
 - Fine tune the model
 - Evaluate the model on test data
@@ -61,11 +61,25 @@ Note that the PCA is performed using articles with a single label across the top
 
 ## Hugging Face Transformer for text classification
 ### Multi-label classification
-The model that I am goung to use for the multi-label text classification is relying on the pretrained [BERT model from Hugging Face](https://huggingface.co/transformers/model_doc/bert.html). We fine-tune the pretrained BERT model with one additional output layer that handles the labeling task. The additional layer includes a feed forward neural network with sigmoid activation. This allows to obtain a score (0/1) for each label independently.
+See `notebooks/multi-label-text-classification-BERT.ipynb`.
+The model that we use for the multi-label text classification is relying on the pretrained [BERT model from Hugging Face](https://huggingface.co/transformers/model_doc/bert.html). We fine-tune the pretrained BERT model with one additional output layer that handles the labeling task. The additional layer includes a feed forward neural network with sigmoid activation. This allows to obtain a score (0/1) for each label independently.
 
 <p align="center">
 <img src="figs/BERT-1.png", width=700>
 </p>
 
+Notes:
+
+- For training use `BCEWithLogitsLoss()`. This loss combines a Sigmoid layer and the BCELoss in one single class. This version is __more numerically stable__ than using a plain Sigmoid followed by a BCELoss as, by combining the operations into one layer, we take advantage of the log-sum-exp trick for numerical stability.
+- Therefore the model should not include the Sigmoid activation, the sigmoid activation should be added during the evaluation stage.
+- Accuracy measures the fraction of correctly predicted labels, for example, `target=[0,1,0,0,0,0,0,1]`, `output=[1,0,0,0,0,0,0,1]`, therefore `acc=6/8=0.75`. You may see that we've missed the label, however due to the large number of zeros the accuracy is high.
+-  A more informative metrics: precision, recall, F1 score 
+
 ### Multi-class classification
-For the multi-class classification we use soft-max instead of sigmoid activation. To increase the performance we filter out the samples with multiple lablels. See `notebooks/multi-class-text-classification-BERT.ipynb` for details.
+For the multi-class classification we can use soft-max instead of sigmoid activation. For simplicity, I use the same network and the loss function as previously, however the predicted class is found using the maximum score. For the training data, to increase the performance we filter out the samples with multiple lablels. See `notebooks/multi-class-text-classification-BERT.ipynb` for details.
+
+<p align="center">
+<img src="figs/mctc-report.png", width=400>
+<img src="figs/mctc-confusion.png", width=400>
+</p>
+
