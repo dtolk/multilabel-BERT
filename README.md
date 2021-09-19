@@ -48,5 +48,13 @@ Here is an example
 	["Nadolsky","P. M.",""],
 	["Yuan","C. -P.",""]]}
 ```
+The data is parsed, preprocessed and filtered in this notebook `notebooks/data-preparation.ipynb`. Some of the categories such as `acc-phys`, `econ` are underrepresented in the arXiv, I will exclude the categories with very low frequencies to simplify the task (this is a proof of concept project).
+![text](figs/topics-1.png)
+After the filtering end encoding only 8 most popular categories are present in the final dataset that we will use.
+The PCA analysis of the most popular categories confirms the presence of the signal of the dataset.
+<p align="center">
+<img src="figs/pca-1.png", width=300>
+</p>
+
 
 
