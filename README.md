@@ -1,6 +1,6 @@
 # Multi-label text classification using BERT
 
-In this project I use BERT to classify scientific papers into different categories based on their title and abstract.
+In this project I use pretrained BERT from Hugging Face to classify scientific papers into different categories based on their title and abstract.
 
 A classical task in document management is document classification.
 What if paper can have multiple topics associated with it ? I am building a recommender sysytem of categories for a paper based on its title and abstract.
@@ -61,9 +61,10 @@ Note that the PCA is performed using articles with a single label across the top
 
 ## Hugging Face Transformer for text classification
 
-The model that I am goung to use for the multi-abel text classification is relying on the pretrained [BERT model from Hugging Face](https://huggingface.co/transformers/model_doc/bert.html). We fine-tune the pretrained BERT model with one additional output layer that handles the labeling.
-
-
+The model that I am goung to use for the multi-abel text classification is relying on the pretrained [BERT model from Hugging Face](https://huggingface.co/transformers/model_doc/bert.html). We fine-tune the pretrained BERT model with one additional output layer that handles the labeling task.
+<p align="center">
+<img src="figs/BERT-1.png", width=500>
+</p>
 
 
 
