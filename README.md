@@ -60,11 +60,12 @@ The PCA analysis of the most popular categories confirms the presence of the sig
 Note that the PCA is performed using articles with a single label across the topics to get a clear signal.
 
 ## Hugging Face Transformer for text classification
+### Multi-label classification
+The model that I am goung to use for the multi-label text classification is relying on the pretrained [BERT model from Hugging Face](https://huggingface.co/transformers/model_doc/bert.html). We fine-tune the pretrained BERT model with one additional output layer that handles the labeling task. The additional layer includes a feed forward neural network with sigmoid activation. This allows to obtain a score (0/1) for each label independently.
 
-The model that I am goung to use for the multi-abel text classification is relying on the pretrained [BERT model from Hugging Face](https://huggingface.co/transformers/model_doc/bert.html). We fine-tune the pretrained BERT model with one additional output layer that handles the labeling task.
 <p align="center">
-<img src="figs/BERT-1.png", width=500>
+<img src="figs/BERT-1.png", width=700>
 </p>
 
-
-
+### Multi-class classification
+For the multi-class classification we use soft-max instead of sigmoid activation. To increase the performance we filter out the samples with multiple lablels. See `notebooks/` for details.
