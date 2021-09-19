@@ -68,4 +68,4 @@ The model that I am goung to use for the multi-label text classification is rely
 </p>
 
 ### Multi-class classification
-For the multi-class classification we use soft-max instead of sigmoid activation. To increase the performance we filter out the samples with multiple lablels. See `notebooks/` for details.
+For the multi-class classification we use soft-max instead of sigmoid activation. To increase the performance we filter out the samples with multiple lablels. See `notebooks/multi-class-text-classification-BERT.ipynb` for details.
