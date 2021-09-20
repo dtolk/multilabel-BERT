@@ -1,13 +1,8 @@
 # Multi-label text classification using BERT
 
-In this project I use pretrained BERT from Hugging Face to classify scientific papers into different categories based on their title and abstract.
+In this project I use pretrained BERT from Hugging Face to classify scientific papers into different categories based on their title and abstract. This is a multi label classification problem. Each paper can have multiple topics/tags associated with it.
 
-A classical task in document management is document classification.
-What if paper can have multiple topics associated with it ? I am building a recommender sysytem of categories for a paper based on its title and abstract.
-
-As such, this could be framed as a multi label classification problem. Given an abstract what topics/tags can we confidentially assign to it without human intervention.
-
-I add classification an additional layer to the pretrained BERT from Transformers library by Hugging Face.
+Processing steps:
 
 - Data preprocessing 
 - Preprocess text data for BERT
@@ -78,7 +73,7 @@ Notes:
 -  We can extend a binary metric to __multiclass__ or __multilabel__ problems by treating the problem as a collection of binary problems, one for each class.
 
 <p align="center">
-<img src="figs/mltc-confusion.png", width=400>
+<img src="figs/mltc-confusion.png", width=500>
 </p>
 
 -  The binary metric should be properly averaged across the set of classes
@@ -91,7 +86,10 @@ Notes:
 For the multi-class classification we can use soft-max instead of sigmoid activation. For simplicity, I use the same network and the loss function as previously, however the predicted class is found using the maximum score. For the training data, to increase the performance we filter out the samples with multiple lablels. See `notebooks/multi-class-text-classification-BERT.ipynb` for details.
 
 <p align="center">
-<img src="figs/mctc-report.png", width=400>
-<img src="figs/mctc-confusion.png", width=400>
+<img src="figs/mctc-report.png", width=500>
+</p>
+	
+<p align="center">
+<img src="figs/mctc-confusion.png", width=500>
 </p>
 
