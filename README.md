@@ -74,6 +74,18 @@ Notes:
 - Therefore the model should not include the Sigmoid activation, the sigmoid activation should be added during the evaluation stage.
 - Accuracy measures the fraction of correctly predicted labels, for example, `target=[0,1,0,0,0,0,0,1]`, `output=[1,0,0,0,0,0,0,1]`, therefore `acc=6/8=0.75`. You may see that we've missed the label, however due to the large number of zeros the accuracy is high.
 -  A more informative metrics: precision, recall, F1 score 
+-  Some metrics are defined for binary classification tasks (e.g. F1 score, ROC-AUC).
+-  We can extend a binary metric to __multiclass__ or __multilabel__ problems by treating the problem as a collection of binary problems, one for each class.
+
+<p align="center">
+<img src="figs/mltc-confusion.png", width=400>
+</p>
+
+-  The binary metric should be properly averaged across the set of classes
+	- "macro averaging" mean of the binary metrics, all the classes have equal weights. The metric (for example, precision) for each class is computed independently.
+	- "weighted averaging" accounts for class imbalance, each class' score weighted by its presence in the true data sample (support column)
+	- "micro averaging" aggegate the contribution of all classes to compute the average metric. _Precision=(TP\_a+TP\_b+TP\_c)/Total_. Micro-averaging may be preferred in multilabel settings, including multiclass classification where a majority class is to be ignored; micro averaging properly captures class imbalances, it is less misleading than macro averaging.
+	- "samples" apply only to multilabel problems. Calculates metrics for each sample and returns their average.
 
 ### Multi-class classification
 For the multi-class classification we can use soft-max instead of sigmoid activation. For simplicity, I use the same network and the loss function as previously, however the predicted class is found using the maximum score. For the training data, to increase the performance we filter out the samples with multiple lablels. See `notebooks/multi-class-text-classification-BERT.ipynb` for details.
